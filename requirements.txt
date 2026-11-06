@@ -1,0 +1,8 @@
+flask
+flask-cors
+sqlalchemy
+python-dotenv
+mistralai
+openrouter
+pydantic
+python-multipart
