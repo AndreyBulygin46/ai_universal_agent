@@ -5,6 +5,12 @@ import os
 
 load_dotenv()
 
+# --- Конфиг Универсальный ---
+class UniversalConfig:
+    def __init__(self, universal_api_key=None, universal_api_url=None):
+        self.universal_api_key = universal_api_key
+        self.universal_api_url = universal_api_url
+
 # --- Конфиг Mistral ---
 class MistralConfig:
     MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY')
@@ -13,29 +19,34 @@ class MistralConfig:
 # --- Конфиг OpenRouter ---
 class OpenRouterConfig:
     OPEN_ROUTER_API_KEY = os.getenv('OPEN_ROUTER_API_KEY')
-    OPEN_ROUTER_URL = 'https://api.openrouter.ai/v1
+    OPEN_ROUTER_URL = 'https://api.openrouter.ai/v1'
 
 # --- Конфиг OpenCode ---
 class OpenCodeConfig:
-    pass
-
-# --- Конфиг универсальный ---
-class UniversalConfig:
-    pass
+    OPEN_CODE_API_KEY = os.getenv('OPEN_CODE_API_KEY')
+    OPEN_CODE_URL = 'https://opencode.ai/v1'
 
 # --- Конфиг Базы данных ---
 class DataBaseConfig:
-    pass
+    DB_URL = f'sqlite:///{os.getenv("DB_URL")}'
+    DB_USER = os.getenv('DB_USER')
+    DB_PASSWORD = os.getenv('DB_PASSWORD')
+    DB_NAME = os.getenv('DB_NAME')
+    DB_HOST = os.getenv('DB_HOST')
+    DB_PORT = os.getenv('DB_PORT')
 
 # --- Конфиг Логирования ---
 class LoggingConfig:
-    pass
+    LOGGING_LEVEL = os.getenv('LOGGING_LEVEL', 'INFO')
 
-# --- Главный конфиг ---
+# --- Точка входа в конфигурацию ---
 class BaseConfig:
+    UNIVERSAL = UniversalConfig()
     MISTRAL = MistralConfig()
     OPEN_ROUTER = OpenRouterConfig()
     OPEN_CODE = OpenCodeConfig()
-    UNIVERSAL = UniversalConfig()
     DATA_BASE = DataBaseConfig()
     LOGGING = LoggingConfig()
+
+if __name__ == '__main__':
+    print(BaseConfig.DATA_BASE.DB_URL)

@@ -6,3 +6,4 @@ mistralai
 openrouter
 pydantic
 python-multipart
+requests
